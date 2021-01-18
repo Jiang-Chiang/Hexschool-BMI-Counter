@@ -79,6 +79,75 @@
     text-align: center;
 }
 
+.bmiResultsList{
+    width: 100%;
+    min-height: 72px;
+}
+
+#bmiResultsListArea{
+    padding-top: 48px;
+}
+
+#bmiResultsListArea h1{
+    margin-bottom: 36px;
+}
+
+.resultRow{
+    width: 624px;
+    height: 62px;
+    background: #FFFFFF;
+    margin: auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+
+.status{
+    min-width: 40px;
+    height: 20px;
+    margin: 21px 70px 21px 19px;
+    font-size: 20px;
+    text-align: start;
+}
+
+.dataBlock{
+    width: 280px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40px;
+}
+
+.dataItem{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dataTitle{
+    font-size: 12px;
+    height: 12px;
+    margin-right: 7px;
+    align-self: center;
+}
+
+#dateBlock{
+    font-size: 12px;
+    margin-right: 40px;
+}
+
+#bmiResultsListArea button{
+    border: none;
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgb(179, 1, 1);
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 50px;
+}
+
 footer{
     width: 1024px;
     height: 90px;

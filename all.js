@@ -13,11 +13,34 @@ function submitCalculation(e) {
     let height = heightField.value;
 
     if (!!height && !!weight) {
+        let status;
         let bmi = (weight / Math.pow((height / 100), 2)).toFixed(2);
         let dateNow = new Date();
         let dateNowFormat = `${dateNow.getFullYear()}-${dateNow.getMonth() + 1}-${dateNow.getDate()}`;
 
+        switch (!!bmi) {
+            case (bmi < 18.5):
+                status = '過輕';
+                break;
+            case (bmi >= 18.5 && bmi < 24):
+                status = '理想';
+                break;
+            case (bmi >= 24 && bmi < 27):
+                status = '過重';
+                break;
+            case (bmi >= 27 && bmi < 30):
+                status = '輕度肥胖';
+                break;
+            case (bmi >= 30 && bmi < 35):
+                status = '中度肥胖';
+                break;
+            case (bmi > 35):
+                status = '重度肥胖';
+                break;
+        }
+
         let storageObj = {
+            status: status,
             bmi: bmi,
             weight: weight,
             height: height,
@@ -27,7 +50,7 @@ function submitCalculation(e) {
         storageArr.push(storageObj);
         localStorage.setItem('storageData', JSON.stringify(storageArr));
 
-        updateList();
+        // updateResultsList();
 
     } else {
         alert('請完整填寫內容！')
@@ -35,7 +58,12 @@ function submitCalculation(e) {
 
 }
 
-function updateList() {
+function updateResultsList() {
+    let ResultsList = '';
+
+    for (let i = 0; i < storageArr.length; i++) {
+        let ResultsList +=
+    }
 
 }
 
