@@ -1,1 +1,0 @@
-# Hexschool-BMI-Counter
