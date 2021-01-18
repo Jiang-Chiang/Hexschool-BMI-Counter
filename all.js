@@ -2,9 +2,14 @@ var submitButton = document.querySelector('#submitButton');
 var heightField = document.querySelector('#heightField');
 var weightField = document.querySelector('#weightField');
 var bmiResultsList = document.querySelector('#bmiResultsList');
+var deleteAllButton = document.querySelector('#deleteAllButton');
 var storageArr = JSON.parse(localStorage.getItem('storageData')) || [];
 
 submitButton.addEventListener('click', submitCalculation);
+bmiResultsList.addEventListener('click', deleteSingleRow);
+deleteAllButton.addEventListener('click', deleteWholeList);
+
+updateResultsList();
 
 function submitCalculation(e) {
     e.preventDefault();
@@ -50,7 +55,10 @@ function submitCalculation(e) {
         storageArr.push(storageObj);
         localStorage.setItem('storageData', JSON.stringify(storageArr));
 
-        // updateResultsList();
+        document.querySelector('#heightField').value = '';
+        document.querySelector('#weightField').value = '';
+
+        updateResultsList();
 
     } else {
         alert('請完整填寫內容！')
@@ -62,11 +70,45 @@ function updateResultsList() {
     let ResultsList = '';
 
     for (let i = 0; i < storageArr.length; i++) {
-        let ResultsList +=
+        ResultsList += `
+            <li data-index="0" class="resultRow">
+                <div class="status">
+                    ${storageArr[i].status}
+                </div>
+                <div class="dataBlock">
+                    <div class="dataItem">
+                        <div class="dataTitle">BMI</div>${storageArr[i].bmi}
+                    </div>
+                    <div class="dataItem">
+                        <div class="dataTitle">weight</div>${storageArr[i].weight}
+                    </div>
+                    <div class="dataItem">
+                        <div class="dataTitle">height</div>${storageArr[i].height}
+                    </div>
+                </div>
+                <div id="dateBlock">
+                    ${storageArr[i].date}
+                </div>
+                <a href="#">刪除本列</a>
+            </li>`
     }
 
+    bmiResultsList.innerHTML = ResultsList;
 }
 
-function deleteSingleRow() {
+function deleteSingleRow(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== 'A') { return; }
 
+    let selectedIndex = e.target.dataset.index;
+    storageArr.splice(selectedIndex, 1);
+
+    localStorage.setItem('storageData', JSON.stringify(storageArr));
+    updateResultsList();
+}
+
+function deleteWholeList() {
+    storageArr = [];
+    localStorage.removeItem('storageData');
+    updateResultsList();
 }

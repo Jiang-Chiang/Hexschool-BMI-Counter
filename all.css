@@ -100,19 +100,20 @@
     list-style: none;
     display: flex;
     align-items: center;
+    margin-bottom: 10px
 }
 
 
 .status{
-    min-width: 40px;
+    min-width: 80px;
     height: 20px;
-    margin: 21px 70px 21px 19px;
+    margin: 21px 60px 21px 19px;
     font-size: 20px;
     text-align: start;
 }
 
 .dataBlock{
-    width: 280px;
+    width: 260px;
     height: 20px;
     display: flex;
     justify-content: space-between;
@@ -137,6 +138,10 @@
     margin-right: 40px;
 }
 
+#bmiResultsList a{
+    font-size: 14px;
+}
+
 #bmiResultsListArea button{
     border: none;
     width: 90px;
@@ -146,6 +151,7 @@
     font-size: 14px;
     color: #ffffff;
     margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 footer{
