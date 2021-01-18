@@ -38,10 +38,12 @@
 #inputBlock input{
     width: 100%;
     height: 40px;
+    padding: 0px 5px 0px 5px;
     background: rgba(255,255,255,0.18);
     border: 2px solid #FFD366;
     border-radius: 10px;
     color: #fff;
+    margin-top: 5px;
 }
 
 #inputBlock > input{
@@ -52,23 +54,74 @@
     outline: none;
 }
 
-#bmiCalculatorContainer button{
-    width: 120px;
-    height: 120px;
-    border: none;
-    border-radius: 120px;
-    background: #FFD366;
-    margin-left: calc(400px - 97px - 250px);
+#buttonAndResultBlock{
+    width: 123px;
+    height: 123px;
     margin-top: 20px;
+    margin-left: calc(400px - 97px - 250px);
 }
 
-#bmiCalculatorContainer button:focus{
+#submitButton{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 123px;
+    background: #FFD366;
+}
+
+#submitButton:focus{
     outline: none;
 }
 
-#bmiCalculatorContainer button:hover{
+#submitButton:hover{
     background: #DEA921;
     cursor: pointer;
+}
+
+.resultCircle{
+    width: 100%;
+    height: 100%;
+    border-radius: 123px;
+    border: 6px solid;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    display: none;
+}
+
+.resultBlock{
+    color: #FFFFFF;
+    font-size: 14px;
+    align-self: center;
+    text-align: center;
+}
+
+.resultBlock div{
+    font-size: 32px;
+}
+
+.statusInCircle{
+    min-width: 150px;
+    font-size: 32px;
+    position: absolute;
+    top: 32px;
+    left: calc(100% + 18px);
+}
+
+#restartButton{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    border: 3px solid #424242;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+}
+
+.restartButton img{
+    justify-self: center;
+    align-self: center;
 }
 
 #bmiResultsListArea{
@@ -103,8 +156,7 @@
     margin-bottom: 10px
 }
 
-
-.status{
+.statusInRow{
     min-width: 80px;
     height: 20px;
     margin: 21px 60px 21px 19px;
