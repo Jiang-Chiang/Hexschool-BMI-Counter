@@ -1,3 +1,4 @@
+// 變數宣告
 var submitButton = document.querySelector('#submitButton');
 var resultCircle = document.querySelector('.resultCircle');
 var heightField = document.querySelector('#heightField');
@@ -6,22 +7,38 @@ var bmiResultsList = document.querySelector('#bmiResultsList');
 var deleteAllButton = document.querySelector('#deleteAllButton');
 var storageArr = JSON.parse(localStorage.getItem('storageData')) || [];
 
+// 監聽事件
 submitButton.addEventListener('click', submitCalculation);
 bmiResultsList.addEventListener('click', deleteSingleRow);
 deleteAllButton.addEventListener('click', deleteWholeList);
 
-document.addEventListener('click', function (e) {
-    if (e.target.id == 'restartButton' || e.target.parentNode.nodeName == 'BUTTON') {
-        resultCircle.style.display = 'none';
-        submitButton.style.display = 'block';
-
+heightField.addEventListener('change', function () {
+    if (heightField.value < 30) {
+        heightField.value = 30;
+    } else if (heightField.value > 250) {
+        heightField.value = 250;
     }
 });
 
+weightField.addEventListener('change', function () {
+    if (weightField.value < 0.3) {
+        weightField.value = 0.3;
+    } else if (weightField.value > 300) {
+        weightField.value = 300;
+    }
+});
+
+document.addEventListener('keyup', function (e) {
+    if (e.keyCode == 13) {
+        submitCalculation();
+    }
+});
+
+// 紀錄列表初始更新
 updateResultsList();
 
-function submitCalculation(e) {
-    e.preventDefault();
+// 函式：送出BMI計算
+function submitCalculation() {
 
     let weight = weightField.value;
     let height = heightField.value;
@@ -60,9 +77,6 @@ function submitCalculation(e) {
                 break;
         }
 
-        submitButton.style.display = 'none';
-        resultCircle.style.display = 'flex';
-
         resultCircle.innerHTML = `
                 <div class="resultBlock">
                     <div>${bmi}</div>
@@ -73,7 +87,18 @@ function submitCalculation(e) {
                     </button>
                 <div class="statusInCircle">${status}</div>`;
 
+        submitButton.style.display = 'none';
+        resultCircle.style.display = 'flex';
         resultCircle.style.borderColor = statusColor;
+        document.querySelector('#restartButton').style.background = statusColor;
+        document.querySelector('.statusInCircle').style.color = statusColor;
+        document.addEventListener('click', function (e) {
+            if (e.target.id == 'restartButton' || e.target.parentNode.nodeName == 'BUTTON') {
+                resultCircle.style.display = 'none';
+                submitButton.style.display = 'block';
+
+            }
+        });
 
         let storageObj = {
             status: status,
@@ -92,11 +117,12 @@ function submitCalculation(e) {
         updateResultsList();
 
     } else {
-        alert('請填寫完整內容！')
+        alert('請填寫完整或正確內容！')
     }
 
 }
 
+// 函式：更新紀錄列表
 function updateResultsList() {
     let ResultsList = '';
 
@@ -125,8 +151,19 @@ function updateResultsList() {
     }
 
     bmiResultsList.innerHTML = ResultsList;
+
+    if (storageArr.length == 0) {
+        deleteAllButton.setAttribute('disabled', 'disabled');
+        deleteAllButton.style.cursor = 'not-allowed';
+        deleteAllButton.textContent = '暫無資料';
+    } else {
+        deleteAllButton.removeAttribute('disabled');
+        deleteAllButton.style.cursor = 'pointer';
+        deleteAllButton.textContent = '全部清空';
+    }
 }
 
+// 函式：刪除單一紀錄
 function deleteSingleRow(e) {
     e.preventDefault();
     if (e.target.nodeName !== 'A') { return; }
@@ -138,6 +175,7 @@ function deleteSingleRow(e) {
     updateResultsList();
 }
 
+// 函式：刪除全部記錄
 function deleteWholeList() {
     storageArr = [];
     localStorage.removeItem('storageData');

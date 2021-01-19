@@ -119,6 +119,10 @@
     display: flex;
 }
 
+#restartButton:focus{
+    outline: none;
+}
+
 .restartButton img{
     justify-self: center;
     align-self: center;
@@ -202,8 +206,21 @@
     background: rgb(179, 1, 1);
     font-size: 14px;
     color: #ffffff;
+    cursor: pointer;
     margin-top: 50px;
     margin-bottom: 30px;
+}
+
+#bmiResultsListArea button:hover{
+    opacity: 0.7;
+}
+
+#bmiResultsListArea button:focus{
+    outline: none;
+}
+
+#bmiResultsListArea button:active{
+    transform: translate(0px, 3px);
 }
 
 footer{
