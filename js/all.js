@@ -83,7 +83,7 @@ function submitCalculation() {
                     BMI
                 </div>
                     <button id="restartButton">
-                        <img src="/img/icons_loop.png" alt="">
+                        <img src="./img/icons_loop.png" alt="">
                     </button>
                 <div class="statusInCircle">${status}</div>`;
 
